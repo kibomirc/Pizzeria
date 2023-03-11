@@ -1,15 +1,18 @@
 package pizzeria.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pizzeria.model.Pizza;
+import pizzeria.service.PizzeriaService;
 
 @RestController
 public class ControllerPizzaiolo {
 
-    // Qui verrà inniettato il service
+    @Autowired
+    PizzeriaService pizzeriaService;
 
 
     // prende la prima pizza dal database con status TODO e la lavora
@@ -23,6 +26,9 @@ public class ControllerPizzaiolo {
 
 
          */
+
+        pizzeriaService.getPizza();
+
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
@@ -30,7 +36,7 @@ public class ControllerPizzaiolo {
 
 
     @GetMapping("/pizzaiolo/donePizza")
-    public ResponseEntity infornaPizza() {
+    public ResponseEntity donePizza() {
         //ObjectMapper objectMapper = new ObjectMapper();
         //Pizza pizzaObj = objectMapper.convertValue(pizza,Pizza.class);
 
@@ -40,7 +46,7 @@ public class ControllerPizzaiolo {
 
          */
 
-        // chiamo il service per inserire in coda la pizza
+        pizzeriaService.donePizza();
         return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }

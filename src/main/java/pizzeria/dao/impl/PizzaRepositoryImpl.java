@@ -2,6 +2,7 @@ package pizzeria.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import pizzeria.dao.PizzaRepository;
 import pizzeria.model.Pizza;
@@ -16,7 +17,7 @@ public class PizzaRepositoryImpl implements PizzaRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public int insertPizza(Pizza pizza, String token) {
+    public int insertPizza(Pizza pizza) {
         return jdbcTemplate.update(
                 "insert into pizzeria (ticket, pizzaName, status) values(?,?,?)",
                 pizza.getTicket(), pizza.getPizzaName(), "TO DO");
@@ -38,9 +39,9 @@ public class PizzaRepositoryImpl implements PizzaRepository {
     }
 
     @Override
-    public List<Pizza>findPizza() {
+    public List<Pizza>makePizza() {
         return jdbcTemplate.query(
-                "select * from pizzeria where status = \"TO DO\" LIMIT 1",
+                "select * from pizzeria where STATUS = 'TO DO' LIMIT 1",
                 (rs, rowNum) ->
                         new Pizza(
                                 rs.getString("ticket"),
@@ -51,8 +52,31 @@ public class PizzaRepositoryImpl implements PizzaRepository {
     }
 
     @Override
-    public Optional<Pizza> findByTicket(String ticket) {
-        return jdbcTemplate.queryForObject("select * from pizzeria where ticket like ?", Optional.class);
+    public List<Pizza> findPizza() {
+        return jdbcTemplate.query(
+                "SELECT * FROM PIZZERIA where STATUS = 'PREPARING'",
+                (rs, rowNum) ->
+                        new Pizza(
+                                rs.getString("ticket"),
+                                rs.getString("pizzaName"),
+                                rs.getString("status")
+                        )
+        );
+    }
+
+
+    @Override
+    public List<Pizza> findByTicket(String ticket) {
+        return jdbcTemplate.query(
+                "select * from pizzeria where TICKET like ?",
+                new Object[] { ticket },
+                (rs, rowNum) ->
+                        new Pizza(
+                                rs.getString("ticket"),
+                                rs.getString("pizzaName"),
+                                rs.getString("status")
+                        )
+        );
     }
 
 }
