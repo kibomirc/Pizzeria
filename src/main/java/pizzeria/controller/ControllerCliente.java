@@ -36,7 +36,7 @@ public class ControllerCliente {
     public ResponseEntity getPizza(@RequestParam String ticket) {
 
         // chiamo service vedere lo status della pizza passandogli il ticket
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body("DONE");
 
     }
 

@@ -8,6 +8,9 @@ public class Pizza {
 
     private String status;
 
+    public Pizza(String ticket, String pizzaName, String status) {
+    }
+
     public String getStatus() {
         return status;
     }
