@@ -61,8 +61,9 @@ public class PizzeriaService {
         // prendo la pizza che ho in preparazioen
         List<Pizza> pizza = pizzaRepository.findPizza();
         // aggiorno lo status in DONE
-        pizza.get(0).setStatus(DONE);
-        pizzaRepository.updateStatus(pizza.get(0));
-
+        if(pizza.size() > 0) {
+            pizza.get(0).setStatus(DONE);
+            pizzaRepository.updateStatus(pizza.get(0));
+        }
     }
 }

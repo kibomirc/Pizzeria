@@ -35,8 +35,6 @@ public class ControllerPizzaiolo {
 
     @GetMapping("/pizzaiolo/donePizza")
     public ResponseEntity donePizza() {
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //Pizza pizzaObj = objectMapper.convertValue(pizza,Pizza.class);
 
         /*
            Prende lo status della pizza che sta in "PREPARING" ( ce ne sarà solo una )
