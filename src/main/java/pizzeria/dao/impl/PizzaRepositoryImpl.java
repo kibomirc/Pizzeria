@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import pizzeria.dao.PizzaRepository;
+import pizzeria.dao.mapper.PizzaMapper;
 import pizzeria.model.Pizza;
 
 import java.util.List;
@@ -39,16 +40,9 @@ public class PizzaRepositoryImpl implements PizzaRepository {
     }
 
     @Override
-    public List<Pizza>makePizza() {
-        return jdbcTemplate.query(
-                "select * from pizzeria where STATUS = 'TO DO' LIMIT 1",
-                (rs, rowNum) ->
-                        new Pizza(
-                                rs.getString("ticket"),
-                                rs.getString("pizzaName"),
-                                rs.getString("status")
-                        )
-        );
+    public List<Pizza> makePizza() {
+
+        return jdbcTemplate.query("select * from pizzeria where STATUS = 'TO DO' LIMIT 1", new PizzaMapper());
     }
 
     @Override
@@ -66,17 +60,9 @@ public class PizzaRepositoryImpl implements PizzaRepository {
 
 
     @Override
-    public List<Pizza> findByTicket(String ticket) {
-        return jdbcTemplate.query(
-                "select * from pizzeria where TICKET like ?",
-                new Object[] { ticket },
-                (rs, rowNum) ->
-                        new Pizza(
-                                rs.getString("ticket"),
-                                rs.getString("pizzaName"),
-                                rs.getString("status")
-                        )
-        );
+    public String findByTicket(String ticket) {
+        String sql = "select STATUS from pizzeria where TICKET like '?'".replace("?" , ticket);
+        return jdbcTemplate.queryForObject(sql,String.class);
     }
 
 }

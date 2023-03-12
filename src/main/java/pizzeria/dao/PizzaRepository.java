@@ -18,7 +18,7 @@ public interface PizzaRepository {
 
     List<Pizza> findPizza();
 
-    List<Pizza> findByTicket(String ticket);
+    String findByTicket(String ticket);
 
 
 }

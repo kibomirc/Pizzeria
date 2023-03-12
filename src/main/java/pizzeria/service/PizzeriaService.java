@@ -35,7 +35,7 @@ public class PizzeriaService {
     }
 
     public String getPizza(String ticket) {
-        return pizzaRepository.findByTicket(ticket).get(0).getTicket();
+        return pizzaRepository.findByTicket(ticket);
     }
 
     // Service Pizzaiolo
@@ -47,6 +47,7 @@ public class PizzeriaService {
             // Non ci sono pizze in preparazione
             pizza = pizzaRepository.makePizza();
             pizza.get(0).setStatus(PREPARING);
+
             pizzaRepository.updateStatus(pizza.get(0));
         } else {
             // Lancia Eccezione
