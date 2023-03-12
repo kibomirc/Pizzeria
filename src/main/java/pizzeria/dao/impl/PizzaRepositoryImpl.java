@@ -41,21 +41,13 @@ public class PizzaRepositoryImpl implements PizzaRepository {
 
     @Override
     public List<Pizza> makePizza() {
-
         return jdbcTemplate.query("select * from pizzeria where STATUS = 'TO DO' LIMIT 1", new PizzaMapper());
     }
 
     @Override
     public List<Pizza> findPizza() {
         return jdbcTemplate.query(
-                "SELECT * FROM PIZZERIA where STATUS = 'PREPARING'",
-                (rs, rowNum) ->
-                        new Pizza(
-                                rs.getString("ticket"),
-                                rs.getString("pizzaName"),
-                                rs.getString("status")
-                        )
-        );
+                "SELECT * FROM PIZZERIA where STATUS = 'PREPARING'", new PizzaMapper());
     }
 
 
