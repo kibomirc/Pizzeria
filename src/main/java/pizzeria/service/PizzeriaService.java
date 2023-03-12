@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 import pizzeria.dao.PizzaRepository;
+import pizzeria.excepiton.PizzaIsBeingPreparing;
 import pizzeria.model.Pizza;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public class PizzeriaService {
 
             pizzaRepository.updateStatus(pizza.get(0));
         } else {
-            // Lancia Eccezione
+            throw new PizzaIsBeingPreparing("Pizza is being Preparing");
         }
 
     }
