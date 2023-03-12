@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pizzeria.dao.PizzaRepository;
 import pizzeria.excepiton.PizzaIsBeingPreparing;
 import pizzeria.model.Pizza;
+import pizzeria.utils.TicketUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class PizzeriaService {
 
     public String ordinaPizza(Pizza pizza) {
           // genera ticket impletare la classe utils
-          pizza.setTicket("AA345ZZ"); // qui l'ho cablata
+          pizza.setTicket(TicketUtils.ticketGenerator());
           pizzaRepository.insertPizza(pizza);
 
           return pizza.getTicket();
