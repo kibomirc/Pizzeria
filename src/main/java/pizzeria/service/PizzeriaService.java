@@ -9,7 +9,6 @@ import pizzeria.model.Pizza;
 import pizzeria.utils.TicketUtils;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Configurable
