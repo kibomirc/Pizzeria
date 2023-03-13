@@ -10,7 +10,7 @@ public interface PizzaRepository {
 
     int insertPizza(Pizza pizza);
 
-    int deleteByTicket(String ticket);
+    int deleteAll();
 
     int updateStatus(Pizza pizza);
 

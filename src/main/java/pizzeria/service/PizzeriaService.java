@@ -2,6 +2,7 @@ package pizzeria.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import pizzeria.dao.PizzaRepository;
 import pizzeria.excepiton.PizzaIsBeingPreparing;
@@ -36,7 +37,11 @@ public class PizzeriaService {
     }
 
     public String getPizza(String ticket) {
-        return pizzaRepository.findByTicket(ticket);
+        try {
+            return pizzaRepository.findByTicket(ticket);
+        }catch(EmptyResultDataAccessException e) {
+            return "TICKET NON VALIDO!";
+        }
     }
 
     // Service Pizzaiolo
@@ -64,5 +69,9 @@ public class PizzeriaService {
             pizza.get(0).setStatus(DONE);
             pizzaRepository.updateStatus(pizza.get(0));
         }
+    }
+
+    public void deleteAllOrder() {
+        pizzaRepository.deleteAll();
     }
 }

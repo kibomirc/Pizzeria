@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(classes = PizzeriaApplication.class)
 public class TestPizzeriaService {
 
-    // API CLIENTE
-
     @Autowired
     PizzeriaService pizzeriaService;
 
@@ -48,6 +46,9 @@ public class TestPizzeriaService {
      */
     @Test
     public void testGetPizzaPreparing() {
+
+        /* Per Effettuare questo test mi devo assicurare di non avere nessun record nel db */
+         pizzeriaService.deleteAllOrder();
         //Effettuiamo l'ordine
 
         Pizza pizza = new Pizza();

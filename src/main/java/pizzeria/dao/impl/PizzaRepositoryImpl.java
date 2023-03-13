@@ -25,10 +25,9 @@ public class PizzaRepositoryImpl implements PizzaRepository {
     }
 
     @Override
-    public int deleteByTicket(String ticket) {
+    public int deleteAll() {
         return jdbcTemplate.update(
-                "delete pizza where ticket = ?",
-                ticket);
+                "DELETE FROM pizzeria");
     }
 
     @Override
