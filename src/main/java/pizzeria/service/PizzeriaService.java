@@ -49,7 +49,7 @@ public class PizzeriaService {
     public void getPizza() {
         // Controllare se ci sono altre pizze in lavorazione
         List<Pizza> pizza = pizzaRepository.findPizza();
-        if(pizza.size() == 0) {
+        if(pizza != null && pizza.size() == 0) {
             // Non ci sono pizze in preparazione
             pizza = pizzaRepository.makePizza();
             pizza.get(0).setStatus(PREPARING);
@@ -65,7 +65,7 @@ public class PizzeriaService {
         // prendo la pizza che ho in preparazioen
         List<Pizza> pizza = pizzaRepository.findPizza();
         // aggiorno lo status in DONE
-        if(pizza.size() > 0) {
+        if(pizza != null && pizza.size() > 0) {
             pizza.get(0).setStatus(DONE);
             pizzaRepository.updateStatus(pizza.get(0));
         }

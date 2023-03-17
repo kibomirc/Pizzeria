@@ -20,7 +20,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     // Errore customizzato per la pizza che è già in preparazione
     @ExceptionHandler(PizzaIsBeingPreparing.class)
     public ResponseEntity<Object> pizzaIsBeingPreparing(final PizzaIsBeingPreparing ex, final WebRequest request) {
-        logger.error("GarageIsFullException", ex);
+        logger.error("There is another pizza in preparing", ex);
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), String.valueOf(ex.getStackTrace()));
         ObjectMapper obj = new ObjectMapper();
         String jsonError = null;

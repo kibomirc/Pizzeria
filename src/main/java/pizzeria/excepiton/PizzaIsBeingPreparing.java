@@ -6,7 +6,7 @@ public class PizzaIsBeingPreparing extends RuntimeException {
     private String message = "Garage is full";
 
     public PizzaIsBeingPreparing() {
-        super("Garage is full");
+        super("Pizza Error");
     }
 
     public PizzaIsBeingPreparing(String message) {
